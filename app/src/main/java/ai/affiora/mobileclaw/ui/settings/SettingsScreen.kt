@@ -116,6 +116,7 @@ private fun pageTitle(page: String): String = when (page) {
     "device" -> stringResource(R.string.settings_device)
     "data" -> stringResource(R.string.settings_data_storage)
     "about" -> stringResource(R.string.settings_about)
+    "advanced" -> "Advanced"
     else -> stringResource(R.string.settings_title)
 }
 
@@ -225,6 +226,7 @@ fun SettingsScreen(
                 "permissions" -> PermissionsPage(viewModel, permissionMode, allowedTools)
                 "device" -> DevicePage(viewModel, deviceName)
                 "data" -> DataPage(onClearHistory = { showClearDialog = true })
+                "advanced" -> AdvancedPage(viewModel)
                 "about" -> AboutPage()
                 else -> SettingsMainList(
                     selectedProvider = selectedProvider,
@@ -306,6 +308,13 @@ private fun SettingsMainList(
             title = stringResource(R.string.settings_data_storage),
             subtitle = stringResource(R.string.settings_clear_history),
             onClick = { onNavigate("data") },
+        )
+        HorizontalDivider(modifier = Modifier.padding(start = 56.dp))
+        SettingsRow(
+            icon = Icons.Filled.Code,
+            title = "Advanced",
+            subtitle = "Failover · Auto-skill · Bedrock max thinking",
+            onClick = { onNavigate("advanced") },
         )
         HorizontalDivider(modifier = Modifier.padding(start = 56.dp))
         SettingsRow(
